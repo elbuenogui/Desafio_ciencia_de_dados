@@ -1,22 +1,28 @@
-# Requisitos
-
-Docker
-Make
-
-# Rodar o projeto
-make
-
-# Forçar reconstrução do ambiente Docker
-make rebuild
+# Projeto configurado com Docker e Makefile para execução simplificada.
 
 
-# Docker
-O projeto usa um Dockerfile que:
+# Pré-requisitos
 
-Usa Python 3.8
-Instala todas as dependências do requirements.txt
-Configura um ambiente isolado para execução
+   Docker instalado
+      Garantirá que o ambiente seja consistente em qualquer máquina.
+   Make instalado
 
-O Docker garantirá que o ambiente seja consistente em qualquer máquina
-O ambiente Docker é reconstruído automaticamente se houver mudanças no Dockerfile ou requirements.txt
-Todos os comandos via make são executados dentro do container Docker
+# Como executar
+
+   # Clone o repositório, acesse o diretório do projeto:
+
+      git clone ..
+      cd desafio_cd
+
+   # No diretório do projeto, execute:
+
+      make setup
+      make run
+
+   # Comandos Disponíveis
+
+      make setup: Cria e inicia o container (usar apenas na primeira vez)
+      make run: Recompila e executa o projeto
+      make stop: Para e remove o container
+
+
