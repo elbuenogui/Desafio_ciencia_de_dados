@@ -1,22 +1,20 @@
-# Use a imagem oficial do Python
-FROM python:3.9-slim
+# Use uma imagem base Python oficial
+FROM python:3.8-slim
 
-# Instale dependências do sistema
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
-
-# Defina o diretório de trabalho
+# Define o diretório de trabalho no container
 WORKDIR /app
 
-# Copie o arquivo requirements.txt
+# Copia o arquivo de requirements primeiro (boa prática para cache de layers)
 COPY requirements.txt .
 
-# Instale as dependências
+# Instala as dependências
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copie o código do projeto
+# Copia o resto do código do projeto
 COPY . .
 
-# Comando padrão para iniciar o Jupyter Notebook
-CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
+# Expõe a porta 8888 (caso use Jupyter)
+EXPOSE 8888
+
+# Comando para rodar o app.py por padrão
+CMD ["python", "app.py"]
