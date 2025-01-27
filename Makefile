@@ -1,25 +1,22 @@
-# Nome da imagem Docker
+# Variáveis
 IMAGE_NAME = desafio_cd
+CONTAINER_NAME = desafio_cd_container
 
-# Arquivo para rastrear última build
-DOCKER_BUILD_MARKER = .docker_build
-
-# Construir a imagem Docker apenas se necessário
-$(DOCKER_BUILD_MARKER): Dockerfile requirements.txt
+# Inicia o ambiente Docker (primeira vez)
+setup:
 	docker build -t $(IMAGE_NAME) .
-	touch $(DOCKER_BUILD_MARKER)
+	docker run -d --name $(CONTAINER_NAME) $(IMAGE_NAME)
 
-# Rodar o app.py dentro do container
-run: $(DOCKER_BUILD_MARKER)
-	docker run $(IMAGE_NAME)
+# Para o container
+stop:
+	docker stop $(CONTAINER_NAME)
+	docker rm $(CONTAINER_NAME)
 
-# Forçar reconstrução da imagem
-rebuild:
-	rm -f $(DOCKER_BUILD_MARKER)
-	docker build -t $(IMAGE_NAME) .
-	touch $(DOCKER_BUILD_MARKER)
+# Compila/executa o projeto dentro do container existente
+run:
+	docker exec $(CONTAINER_NAME) rm -rf /app/*
+	docker cp . $(CONTAINER_NAME):/app
+	docker exec $(CONTAINER_NAME) python app.py
+	
 
-# Comando padrão ao executar apenas 'make'
-.DEFAULT_GOAL := run
-
-.PHONY: run rebuild
+.PHONY: setup stop run

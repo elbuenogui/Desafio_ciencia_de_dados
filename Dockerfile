@@ -16,5 +16,5 @@ COPY . .
 # Expõe a porta 8888 (caso use Jupyter)
 EXPOSE 8888
 
-# Comando para rodar o app.py por padrão
-CMD ["python", "app.py"]
+# Mantém o container rodando
+CMD ["tail", "-f", "/dev/null"]
