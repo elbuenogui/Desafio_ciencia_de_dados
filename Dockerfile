@@ -13,8 +13,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copia o resto do código do projeto
 COPY . .
 
-# Expõe a porta 8888 (caso use Jupyter)
+# Expõe a porta 8888 (para Jupyter)
 EXPOSE 8888
 
-# Mantém o container rodando
+# Define variável de ambiente para não solicitar confirmação ao sair
+ENV JUPYTER_ENABLE_LAB=yes
+ENV JUPYTER_TOKEN=senha123
+
+# O comando será substituído pelos comandos do Makefile
 CMD ["tail", "-f", "/dev/null"]
