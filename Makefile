@@ -23,7 +23,7 @@ run-app:
 
 # Inicia o Jupyter Lab
 run-jupyter:
-	docker exec -it $(CONTAINER_NAME) jupyter lab --ip 0.0.0.0 --port 8888 --no-browser --allow-root --NotebookApp.token='senha123'
+	docker exec -it $(CONTAINER_NAME) jupyter lab --ip 0.0.0.0 --port 8888 --no-browser --allow-root --NotebookApp.token='1212'
 
 # Reinicia o container
 restart:

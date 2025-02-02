@@ -19,7 +19,12 @@
       make setup
       make run-jupyter
 
-   # Comandos Disponíveis
+   # Para acessar o jupyter notebook
+      acesse: http://localhost:8888/
+      senha: 1212
+      acesse: notebooks/eda.ipynb
+
+   # Comandos make Disponíveis
 
       make setup: Cria e inicia o container (usar apenas na primeira vez)
       make run-app: Recompila e executa o projeto
